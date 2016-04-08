@@ -45,16 +45,6 @@ namespace Glicko2
         }
 
         /// <summary>
-        /// Test whether a particular player participated in the match represented by this result.
-        /// </summary>
-        /// <param name="player"></param>
-        /// <returns></returns>
-        public bool Participated(Rating player)
-        {
-            return player == _winner || player == _loser;
-        }
-
-        /// <summary>
         /// Returns the "score" for a match.
         /// </summary>
         /// <param name="player"></param>

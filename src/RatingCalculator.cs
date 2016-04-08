@@ -150,9 +150,13 @@ namespace Glicko2
 
         private static double F(double x, double delta, double phi, double v, double a, double tau)
         {
-            return (Math.Exp(x)*(Math.Pow(delta, 2) - Math.Pow(phi, 2) - v - Math.Exp(x))/
-                    (2.0*Math.Pow(Math.Pow(phi, 2) + v + Math.Exp(x), 2))) -
-                   ((x - a)/Math.Pow(tau, 2));
+			var e_x = Math.Exp (x);
+			var delta_2 = delta * delta;
+			var phi_2 = phi * phi;
+			var tau_2 = tau * tau;
+			var vi = phi_2 + v + e_x;
+			var vi_2 = vi * vi;
+			return e_x * (delta_2 - phi_2 - v - e_x) / (2.0 * vi) - ((x - a) / tau_2);
         }
 
         /// <summary>

@@ -7,7 +7,7 @@ namespace Glicko2
 	/// </summary>
 	public class RatingPeriodResults
 	{
-		private readonly Dictionary<Rating, List<Result>> _results_ = new Dictionary<Rating, List<Result>> ();
+		private readonly Dictionary<Rating, List<Result>> _results = new Dictionary<Rating, List<Result>> ();
 		private readonly HashSet<Rating> _participants = new HashSet<Rating> ();
 
 		/// <summary>
@@ -29,9 +29,9 @@ namespace Glicko2
 		private void AddResultForPlayer (Rating player, Result result)
 		{
 			List<Result> list;
-			if (!_results_.TryGetValue (player, out list)) {
+			if (!_results.TryGetValue (player, out list)) {
 				list = new List<Result> ();
-				_results_.Add (player, list);
+				_results.Add (player, list);
 			}
 			list.Add (result);
 		}
@@ -68,7 +68,7 @@ namespace Glicko2
 		public IList<Result> GetResults (Rating player)
 		{
 			List<Result> filteredResults;
-			if (!_results_.TryGetValue (player, out filteredResults)) {
+			if (!_results.TryGetValue (player, out filteredResults)) {
 				filteredResults = new List<Result> ();
 			}
 			return filteredResults;
@@ -81,7 +81,7 @@ namespace Glicko2
 		public IEnumerable<Rating> GetParticipants ()
 		{
 			// Run through the results and make sure all players have been pushed into the participants set.
-			foreach (var player in _results_.Keys) {
+			foreach (var player in _results.Keys) {
 				_participants.Add (player);
 			}
 
@@ -103,7 +103,7 @@ namespace Glicko2
 		/// </summary>
 		public void Clear ()
 		{
-			foreach (var result in _results_) {
+			foreach (var result in _results) {
 				result.Value.Clear ();
 			}
 		}
